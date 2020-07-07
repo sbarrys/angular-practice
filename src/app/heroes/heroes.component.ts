@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+// import { HEROES } from './mock-heroes';
 import { HeroService } from '../hero.service';
 @Component({
   selector: 'app-heroes',
@@ -8,10 +8,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
-  hero = {
-    id: 1,
-    name: 'kimtae',
-  };
+  title: string;
   // heroes = HEROES;
   heroes: Hero[];
   getHeroes(): void {
