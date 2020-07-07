@@ -17,7 +17,6 @@ export class HeroService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  //http통신을 통해 데이터를 가져온다.
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
       tap((_) => this.log('fetched heroes')),
@@ -25,17 +24,6 @@ export class HeroService {
     );
   }
 
-  //Mock 히어로 리스트 를 가져온다
-  // getHeroes(): Hero[] {
-  //   return HEROES;
-  // }
-  add(hero: Hero): Observable<any> {
-    const url = `${this.heroesUrl}`;
-    return this.http.post(url, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Hero>('addHero'))
-    );
-  }
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
@@ -43,14 +31,23 @@ export class HeroService {
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
-  private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+
+  add(hero: Hero): Observable<Hero> {
+    const url = `${this.heroesUrl}`;
+    console.log(hero);
+    return this.http.post<Hero>(url, hero, this.httpOptions).pipe(
+      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
   }
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
+  }
 
   ////에러핸들링을/////
   private handleError<T>(operation = 'operation', result?: T) {

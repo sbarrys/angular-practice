@@ -7,15 +7,12 @@ import { Hero } from '../heroes/hero';
   styleUrls: ['./add-hero.component.css'],
 })
 export class AddHeroComponent implements OnInit {
-  hero: Hero;
-
   addHero(heroname: string): void {
     heroname = heroname.trim();
     if (!heroname) {
       return;
     }
-    this.hero.name = heroname;
-    this.heroService.add(this.hero);
+    this.heroService.add({ name: heroname } as Hero).subscribe();
   }
   constructor(private heroService: HeroService) {}
 
