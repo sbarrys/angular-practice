@@ -11,6 +11,12 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class HeroService {
+  //api setting
+  private heroesUrl = 'api/heroes'; // URL to web api
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
   //http통신을 통해 데이터를 가져온다.
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
@@ -23,6 +29,13 @@ export class HeroService {
   // getHeroes(): Hero[] {
   //   return HEROES;
   // }
+  add(hero: Hero): Observable<any> {
+    const url = `${this.heroesUrl}`;
+    return this.http.post(url, hero, this.httpOptions).pipe(
+      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
@@ -33,7 +46,6 @@ export class HeroService {
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }
-  private heroesUrl = 'api/heroes'; // URL to web api
 
   constructor(
     private http: HttpClient,
