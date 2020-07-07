@@ -3,6 +3,7 @@ import { Hero } from './heroes/hero';
 import { HEROES } from './heroes/mock-heroes';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +17,8 @@ export class HeroService {
     return of(HEROES.find((hero) => hero.id === id));
   }
 
-  constructor() {}
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) {}
 }
