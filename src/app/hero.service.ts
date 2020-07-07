@@ -10,12 +10,19 @@ import { MessageService } from './message.service';
 })
 export class HeroService {
   //Mock 히어로 리스트 를 가져온다.
-  getHeroes(): Hero[] {
-    return HEROES;
+  getHeroes(): Observable<Hero[]> {
+    return this.http.get<Hero[]>(this.heroesUrl);
   }
+  // getHeroes(): Hero[] {
+  //   return HEROES;
+  // }
   getHero(id: number): Observable<Hero> {
     return of(HEROES.find((hero) => hero.id === id));
   }
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
+  }
+  private heroesUrl = 'api/heroes'; // URL to web api
 
   constructor(
     private http: HttpClient,
