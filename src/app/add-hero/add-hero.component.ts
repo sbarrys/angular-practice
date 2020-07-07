@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../hero.service';
 import { Hero } from '../heroes/hero';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-add-hero',
   templateUrl: './add-hero.component.html',
@@ -13,8 +15,13 @@ export class AddHeroComponent implements OnInit {
       return;
     }
     this.heroService.add({ name: heroname } as Hero).subscribe();
+    this.goBack();
   }
-  constructor(private heroService: HeroService) {}
+
+  goBack(): void {
+    this.location.back();
+  }
+  constructor(private heroService: HeroService, private location: Location) {}
 
   ngOnInit(): void {}
 }
