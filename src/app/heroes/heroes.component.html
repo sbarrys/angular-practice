@@ -2,14 +2,14 @@
   ========================================<br />
 
   <h3>[ hero Component ]</h3>
-
-  <button (click)="getHeroes()">여기 클릭하면 히어로들 나옵니다.</button>
+  <p>제목 : {{ title }}</p>
   <div>
     <label>
-      히어로 이름 입력
-      <input [(ngModel)]="hero.name" placeholder="입력" />
+      제목입력
+      <input [(ngModel)]="title" placeholder="입력" />
     </label>
   </div>
+  <button (click)="getHeroes()">여기 클릭하면 히어로들 나옵니다.</button>
 
   <ul>
     <li
