@@ -10,7 +10,8 @@
     ----------------------------------------<br />
     <span>| 디테일수정</span> <br />
     | id : {{ hero.id }}
-    <input [(ngModel)]="hero.name" placeholder="이름입력" /><br />
+    <input [(ngModel)]="hero.name" placeholder="이름입력" />
+    <button (click)="update(hero)">정보 업데이트</button><br />
     ----------------------------------------<br />
   </div>
   ======================================
