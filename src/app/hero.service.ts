@@ -41,6 +41,13 @@ export class HeroService {
     );
   }
 
+  update(hero: Hero): Observable<Hero> {
+    const url = `${this.heroesUrl}`;
+    return this.http
+      .put<Hero>(url, hero, this.httpOptions)
+      .pipe(catchError(this.handleError<Hero>(`update id=${hero.id}`)));
+  }
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
