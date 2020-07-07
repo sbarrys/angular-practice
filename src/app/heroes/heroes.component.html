@@ -1,0 +1,26 @@
+<div>
+  ========================================<br />
+
+  <h3>[ hero Component ]</h3>
+
+  <button (click)="getHeroes()">여기 클릭하면 히어로들 나옵니다.</button>
+  <div>
+    <label>
+      히어로 이름 입력
+      <input [(ngModel)]="hero.name" placeholder="입력" />
+    </label>
+  </div>
+
+  <ul>
+    <li
+      *ngFor="let hero of heroes"
+      (click)="onSelect(hero)"
+      [class.selected]="hero === selectedHero"
+    >
+      <span>{{ hero.id }}</span> {{ hero.name }}
+    </li>
+  </ul>
+  ========================================
+
+  <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+</div>
