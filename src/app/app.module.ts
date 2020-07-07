@@ -9,6 +9,7 @@ import { HeroService } from './hero.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
   dataEncapsulation: false,
 });
